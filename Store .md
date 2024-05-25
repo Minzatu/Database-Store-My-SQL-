@@ -1,4 +1,4 @@
-<h1>Database Project for **Store **</h1>
+<h1>Database Project for **Store **1</h1>
 
 The scope of this project is to use all the SQL knowledge gained throught the Software Testing course and apply them in practice.
 
@@ -6,7 +6,7 @@ Application under test: **Store  **
 
 Tools used: MySQL Workbench
 
-Database description: 
+<h4>Database description: 4</h4>
 ** Customers - details about personal data of customers;
 -  Items -details about the products  name,quantity in stock and price per unit ; 
 - Shippers  - details about the courier companies;
@@ -34,7 +34,7 @@ The tables are connected in the following way:
    </li>**Order_statuses ** is connected with **Orders** through a **parent ** relationship which was implemented through **order_statuses.id** as a primary key and **.id_order_status_** as a foreign</li> key</li>
 </ul><br>
 
-<li>Database Queries</li><br>
+<h2>Database Queries</h2>
 
 <ol type="a">
   <li>DDL (Data Definition Language)</li>
@@ -102,7 +102,7 @@ order_id int,
 comments varchar (2000)); 
 
 
-  After the database and the tables have been created, a few ALTER instructions were written in order to update the structure of the database, as described below:
+ <p>After the database and the tables have been created, a few ALTER instructions were written in order to update the structure of the database, as described below:</p> 
 
  ** Change the name of the column  ** 
  <li>alter table order_items change unit_price total_price int;</li> 
@@ -140,6 +140,7 @@ comments varchar (2000));
 ('Sameday'),
 ('Fancourier'),
 ('Cargus'); </li>
+
 <li> INSERT INTO  customers (first_name ,last_name ,birth_date ,phone, address, city ,state) VALUES
  ('Laura','Popescu','1986-03-28','0721965979','10 Ovidiu','Brasov','BV'),
  ('Ines','Cismas','1986-04-13','07321564987','141 Piata clujului','Cluj napoca','CJ'),
@@ -196,7 +197,7 @@ comments varchar (2000));
           update customers set country ='Romania'where id =2;**
 
 
-  <li>DQL (Data Query Language)</li>
+  <h2>DQL (Data Query Language)</h2>
 
 After the testing process, I deleted the data that was no longer relevant in order to preserve the database clean: 
 
@@ -204,7 +205,13 @@ After the testing process, I deleted the data that was no longer relevant in ord
 <li> alter table customers drop column country; </li>
 <li>truncate failed_orders; </li>
 <li>drop table failed_orders; </li>
+
+
+<h2>Data Manipulation Language </h2>
+
+
 In order to simulate various scenarios that might happen in real life I created the following queries that would cover multiple potential real-life situations:
+
 **- where**<br>
 <li> select *from customers  where city='Brasov'; </li>
 **- ORDER BY**<br>
@@ -279,7 +286,7 @@ select*from customers;
 
 </ol>
 
-<li>Conclusions</li>
+<lh2>Conclusions</lh2>
 
 ** Din această lecție am învățat să creez, să modific, să inserez și să manipulez informații din baze de date. Sunt conștientă că există un drum lung înainte pentru a înțelege pe deplin toate aceste sarcini, dar practica o face mai bună. 
 Pot să interoghez aceasta baza de date si sa aflu informatiile necesare preluarii si expedierii unei comenzi, evitand astfel nereguli, ce ar putea afecta calitatea serviciului. Caliatatea porneste in primul rand de la exactitatea si corectitudinea informatilor si folosirea acestora in beneficiul nostru.

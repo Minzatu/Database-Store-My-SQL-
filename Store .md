@@ -1,43 +1,42 @@
-<h1>Database Project for **Store **1</h1>
+# Database Project for **Store**#
 
 The scope of this project is to use all the SQL knowledge gained throught the Software Testing course and apply them in practice.
 
-Application under test: **Store  **
+Application under test: **Store**
 
 Tools used: MySQL Workbench
 
-<h4>Database description: 4</h4>
-** Customers - details about personal data of customers;
--  Items -details about the products  name,quantity in stock and price per unit ; 
-- Shippers  - details about the courier companies;
-- Order_statuses-details about the statuses of the order;
-- My_store - contains the relationship between products id and order id ;
-- Order_items contains details about the products: quantity and prices;
-- Orders is more of a summary that incorporate information about customers,courier companies and more datailed information about orders;
-The scope is to obtain information related to customers and their orders, in order for the process to take place without problems and delays . 
-Accesing this databases  I can assure that everything goes as planned without  any delays involved. **
+### Database description:###
+**Customers** - details about personal data of customers;
+**Items** -details about the products  name,quantity in stock and price per unit ; 
+**Shippers** - details about the courier companies;
+**Order_statuses**-details about the statuses of the order;
+**My_store** - contains the relationship between products id and order id ;
+**Order_items** contains details about the products: quantity and prices;
+**Orders** is more of a summary that incorporate information about customers,courier companies and more datailed information about orders;
 
-<ol>
-<li>Database Schema </li>
-<br>
-You can find below the database schema that was generated through Reverse Engineer and which contains all the tables and the relationships between them.
+ The scope is to obtain information related to customers and their orders, in order for the process to take place without problems and delays . 
+ Accesing this databases  I can assure that everything goes as planned without  any delays involved. 
+
+
+***Database Schema***
+
+ You can find below the database schema that was generated through Reverse Engineer and which contains all the tables and the relationships between them.
 
 The tables are connected in the following way:
 
-<ul>
-  <li> ** Customers  ** is connected with ** Orders ** through a **parent ** relationship which was implemented through **Customers.id** as a primary key and *.id_customer** as a foreign key</li>
-  </li> **Items ** is connected with **Order_itmes ** through a **parent ** relationship which was implemented through **Itmes.id** as a primary key and **.id_product_** as a foreign key </li>
-   </li>**Items ** is connected with **My store ** through a **parent ** relationship which was implemented through **Itmes.id** as a primary key and **.id_product_** as a foreign key</li> 
-  </li> **My store  ** is connected with **Orders ** through a **child ** relationship which was implemented through **Orders.id** as a primary key and **.id_order_** as a foreign key </li>
-   </li>**Shipper  ** is connected with **Orders ** through a **parent ** relationship which was implemented through **Shipper.id** as a primary key and **.id_shipper_** as a foreign key </li>
-   </li>**Shipper  ** is connected with **Orders ** through a **parent ** relationship which was implemented through **Shipper.id** as a primary key and **.id_shipper_** as a foreign key </li>
-   </li>**Order_statuses ** is connected with **Orders** through a **parent ** relationship which was implemented through **order_statuses.id** as a primary key and **.id_order_status_** as a foreign</li> key</li>
-</ul><br>
+**Customers** is connected with **Orders** through a **parent** relationship which was implemented through **Customers.id** as a primary key and **id_customer** as a foreign key 
+**Items** is connected with **Order_itmes** through a **parent** relationship which was implemented through **Itmes.id** as a primary key and **.id_product_** as a foreign key 
+**Items** is connected with **My store** through a **parent** relationship which was implemented through **Items.id** as a primary key and **.id_product_** as a foreign key
+**My store** is connected with **Orders** through a **child** relationship which was implemented through **Orders.id** as a primary key and **.id_order_** as a foreign key 
+**Shipper** is connected with **Orders** through a **parent** relationship which was implemented through **Shipper.id** as a primary key and **.id_shipper_** as a foreign key 
+**Shipper** is connected with **Orders** through a **parent** relationship which was implemented through **Shipper.id** as a primary key and **.id_shipper_** as a foreign key 
+**Order_statuses** is connected with **Orders** through a **parent** relationship which was implemented through **order_statuses.id** as a primary key and **.id_order_status_** as a foreign key
 
-<h2>Database Queries</h2>
+## Database Queries##
 
-<ol type="a">
-  <li>DDL (Data Definition Language)</li>
+
+## DDL (Data Definition Language)##
 
   The following instructions were written in the scope of CREATING the structure of the database (CREATE INSTRUCTIONS)
 

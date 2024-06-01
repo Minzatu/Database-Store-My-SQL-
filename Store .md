@@ -7,13 +7,13 @@ Application under test: **Store**
 Tools used: MySQL Workbench
 
 ### Database description:###
-**Customers** - details about personal data of customers;
-**Items** -details about the products  name,quantity in stock and price per unit ; 
-**Shippers** - details about the courier companies;
-**Order_statuses**-details about the statuses of the order;
-**My_store** - contains the relationship between products id and order id ;
-**Order_items** contains details about the products: quantity and prices;
-**Orders** is more of a summary that incorporate information about customers,courier companies and more datailed information about orders;
+<li>**Customers** - details about personal data of customers;</li>
+<li>**Items** -details about the products  name,quantity in stock and price per unit ; </li>
+<li>**Shippers** - details about the courier companies;</li>
+<li>**Order_statuses**-details about the statuses of the order;</li>
+<li>**My_store** - contains the relationship between products id and order id ;</li>
+<li>**Order_items** contains details about the products: quantity and prices;</li>
+<li>**Orders** is more of a summary that incorporate information about customers,courier companies and more datailed information about orders;</li>
 
  The scope is to obtain information related to customers and their orders, in order for the process to take place without problems and delays . 
  Accesing this databases  I can assure that everything goes as planned without  any delays involved. 
@@ -25,13 +25,13 @@ Tools used: MySQL Workbench
 
 The tables are connected in the following way:
 
-**Customers** is connected with **Orders** through a **parent** relationship which was implemented through **Customers.id** as a primary key and **id_customer** as a foreign key 
-**Items** is connected with **Order_itmes** through a **parent** relationship which was implemented through **Itmes.id** as a primary key and **.id_product_** as a foreign key 
-**Items** is connected with **My store** through a **parent** relationship which was implemented through **Items.id** as a primary key and **.id_product_** as a foreign key
-**My store** is connected with **Orders** through a **child** relationship which was implemented through **Orders.id** as a primary key and **.id_order_** as a foreign key 
-**Shipper** is connected with **Orders** through a **parent** relationship which was implemented through **Shipper.id** as a primary key and **.id_shipper_** as a foreign key 
-**Shipper** is connected with **Orders** through a **parent** relationship which was implemented through **Shipper.id** as a primary key and **.id_shipper_** as a foreign key 
-**Order_statuses** is connected with **Orders** through a **parent** relationship which was implemented through **order_statuses.id** as a primary key and **.id_order_status_** as a foreign key
+<li>**Customers** is connected with **Orders** through a **parent** relationship which was implemented through **Customers.id** as a primary key and **id_customer** as a foreign key</li>
+<li>**Items** is connected with **Order_itmes** through a **parent** relationship which was implemented through **Itmes.id** as a primary key and **.id_product_** as a foreign key</li>
+<li>**Items** is connected with **My store** through a **parent** relationship which was implemented through **Items.id** as a primary key and **.id_product_** as a foreign key</li>
+<li>**My store** is connected with **Orders** through a **child** relationship which was implemented through **Orders.id** as a primary key and **.id_order_** as a foreign key </li>
+<li>**Shipper** is connected with **Orders** through a **parent** relationship which was implemented through **Shipper.id** as a primary key and **.id_shipper_** as a foreign key</li> 
+<li>**Shipper** is connected with **Orders** through a **parent** relationship which was implemented through **Shipper.id** as a primary key and **.id_shipper_** as a foreign key</li> 
+<li>**Order_statuses** is connected with **Orders** through a **parent** relationship which was implemented through **order_statuses.id** as a primary key and **.id_order_status_** as a foreign key</li>
 
 ## Database Queries##
 
@@ -40,8 +40,8 @@ The tables are connected in the following way:
 
   The following instructions were written in the scope of CREATING the structure of the database (CREATE INSTRUCTIONS)
 
-  **CREATE DATABASE store ;
-        USE store;
+ <li>**CREATE DATABASE store ;
+        USE store;</li> 
 
 <li>CREATE TABLE products (
  Id int  primary key auto_increment,
@@ -98,7 +98,7 @@ foreign key(id_product) references products(id)); </li>
 <li> Create table failed_orders(
 id int, 
 order_id int, 
-comments varchar (2000)); 
+comments varchar (2000)); </li>
 
 
  <p>After the database and the tables have been created, a few ALTER instructions were written in order to update the structure of the database, as described below:</p> 
@@ -106,16 +106,16 @@ comments varchar (2000));
  ** Change the name of the column  ** 
  <li>alter table order_items change unit_price total_price int;</li> 
  **- change the properties of one column** 
- <li> alter table customers modify column city varchar ( 25); li> 
+ <li> alter table customers modify column city varchar ( 25); </li> 
 **- change the name of the tables**
  <li> rename table products to items;
-      rename table items to products; li>
+      rename table items to products; </li>
 **- delete a column  from the  table  **
-<li>alter table customers drop column country; li>
+<li>alter table customers drop column country; </li>
 ** adding column properties (adding auto-increment)
 <li>alter table failed_orders add primary key(id);</li>
 
- **- adaugare cheie primara sau secundara (daca nu a fost deja adaugata la crearea tabelei)**
+
  
   
   <li>DML (Data Manipulation Language)</li>
@@ -211,71 +211,69 @@ After the testing process, I deleted the data that was no longer relevant in ord
 
 In order to simulate various scenarios that might happen in real life I created the following queries that would cover multiple potential real-life situations:
 
-**- where**<br>
+**-<strong> where</strong>**<br>
 <li> select *from customers  where city='Brasov'; </li>
-**- ORDER BY**<br>
+
+**-<strong> ORDER BY</strong>**<br>
 **-ordering the products according to increasing price**
 <li>select*from order_items order by total_price asc; </li>
-**- top 3 items with highest quantity in stock**
+**-<strong>top 3 items with highest quantity in stock</strong>**
 <li> select*from order_items order by quantity limit 3;</li>
-**- AND**<br>
+
+**-<strong>AND</strong><br>
 <li> select *from customers where city='Brasov'and city='cluj napoca'; </li>
-**- OR**<br>
+
+**- <strong>OR</strong>**<br>
 <li> select *from customers where city='Brasov'or city='cluj napoca '; </li>
-**- NOT**<br>
+
+**-<strong>NOT</strong> **<br>
 <li> select *from customers where not city='Brasov'and city='cluj'; </li>
-**- like**<br>
+
+**- <strong>like</strong>**<br>
 <li> select *from items where  name  like 'S%'; </li>
 <li> select *from items where  name like '%r'; </li>
 <li> select *from items where  name like '%u%'; </li>
 <li> select *from items where  name like '_t%'; </li> 
-**- inner join**<br>
+
+**-<strong>inner join</strong> **<br>
 **-I want to know the name and surname of the customers and the date of the order**
 <li>select first_name,last_name,order_date from orders inner join customers on orders.id_customer=customers.id;</li>
-**- I want to find out the client id, the order id and the id of the ordered product**
-
+**-<strong>I want to find out the client id, the order id and the id of the ordered product**</strong> 
 <li>select id_order,id_product,id_customer from my_store inner join orders on orders.id= my_store.id_order;</li>
-**-I want to group the name of the product with the price per unit and the price per order;**
+**- <strong>I want to group the name of the product with the price per unit and the price per order;</strong>**
 <li> select name,unit_price,total_price  from items join 
   order_items on items.id=order_items.id_product;</li>
 
-**- left join**<br>
-**
+**-<strong>left join</strong> **<br>
 <li>  select first_name,last_name,city, id_customer from customers left join orders on customers.id = orders.id-id_customer;</li>
 
   
 **- right join**<br>
 **-assignment of products with the quantity in stock**
 <li> select name, quantity from order_items right join items on order_items.id_product=items.id;</li>
-**-the grouping of courier companies according to the city, where the delivery will take place**
+**<strong> -the grouping of courier companies according to the city, where the delivery will take place</strong>**
 <li> select city, id_shipper from customers right join orders on orders.id_customer=customers.id;</li>
 
-**- cross join**<br>
-**-
-  <li> select city, id_shipper from customers cross join orders ;</li>
+**- <strong>cross join</strong>**<br>
+<li> select city, id_shipper from customers cross join orders ;</li>
    <li>select name, quantity from order_items cross join items ;</li>
    
-**-aggregate functions **<br>
+**<strong>-aggregate functions</strong> **<br>
 **-obtaining a sales profit ranking**
-
 <li> select Max(total_price) from order_items; </li>
 <li> select Min(total_price) from order_items; </li>
- 
-<li> select avg(total_price) from order_items; </li>
-
+ <li> select avg(total_price) from order_items; </li>
 <li> select sum(total_price) from order_items; </li>
 
-**- group by**<br>
+**- <strong>group by</strong>**<br>
 **-grouping orders according to status**
-
 <li> select id_order_status, count(id) from orders group by id_order_status; </li>
-
-**-finding the customers, depending on city ;**
+**<strong>-finding the customers, depending on city ;</strong>**
 <li> select city, count(id) from customers group by city ; </li>
 
-**- having**<br>
-**- finding out the first two orders whose price >999;**
-<li> select id, sum(total_price) from order_items group by id having max(total_price)>999; </li>
+**-<strong>having</strong> **<br>
+** <strong>performing a ranking of the orders according to the price > 999 and the largest quantity ordered;</strong> **
+<li> select id, max(total_price) from order_items group by id having max(total_price)>999; </li>
 
 select*from customers;
 **- Subqueries **<br>
@@ -287,10 +285,10 @@ select*from customers;
 
 <lh2>Conclusions</lh2>
 
-** Din această lecție am învățat să creez, să modific, să inserez și să manipulez informații din baze de date. Sunt conștientă că există un drum lung înainte pentru a înțelege pe deplin toate aceste sarcini, dar practica o face mai bună. 
-Pot să interoghez aceasta baza de date si sa aflu informatiile necesare preluarii si expedierii unei comenzi, evitand astfel nereguli, ce ar putea afecta calitatea serviciului. Caliatatea porneste in primul rand de la exactitatea si corectitudinea informatilor si folosirea acestora in beneficiul nostru.
-Prin diferitele scenarii am putut afla cu exactitate adresa de livrare, cine va livra, cand si in ce stadiu se afla comanda.  
-Imi pot gestiona stocul de produse, pretul pe bucata si pot face o analiza a profitului . 
-Această abilitate mă va ajuta să evit să greșesc și să testez manual o aplicație/pagină **
+** From this lesson I learned to create, modify, insert and manipulate information in databases. I am aware that there is a long way to go to fully understand all these tasks, but practice makes it better. 
+I can query this database and find out the information necessary to pick up and send an order, thus avoiding irregularities, which could affect the quality of the service. Quality starts primarily from the accuracy and correctness of the information and its use for our benefit.
+Through the various scenarios, I was able to find out exactly the delivery address, who will deliver, when and at what stage the order is.  
+I can manage my stock of products, the price per piece and make a profit analysis. 
+This skill will help me avoid making mistakes and manually testing an app/page  **
 
 </ol>

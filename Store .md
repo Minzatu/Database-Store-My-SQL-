@@ -43,7 +43,7 @@ The tables are connected in the following way:
  <li>**CREATE DATABASE store ;
         USE store;</li> 
 
-<li>CREATE TABLE products (
+<li><strong>CREATE TABLE products</strong> (
  Id int  primary key auto_increment,
    name varchar(50) NOT NULL,
   quantity_in_stock  int NOT NULL,
@@ -68,7 +68,7 @@ The tables are connected in the following way:
 <li>CREATE TABLE order_statuses (order_statusesorder_statuses
 id int primary key auto_increment,
 name varchar(50) NOT NULL); </li>
-select* from orders;
+
 <li>CREATE TABLE orders (
      id  int primary key auto_increment,
      id_customer  int ,
@@ -80,7 +80,7 @@ select* from orders;
 	foreign key(id_shipper) references shippers(id),
 	foreign key(id_order_status) references order_statuses(id)); </li>
 	
-    <li>CREATE TABLE order_items (
+<li>CREATE TABLE order_items (
   id int primary key auto_increment,
   id_product  int,
   quantity int NOT NULL,
@@ -260,6 +260,9 @@ In order to simulate various scenarios that might happen in real life I created 
    
 **<strong>-aggregate functions</strong> **<br>
 **-obtaining a sales profit ranking**
+<li> select*from order_items order by total_price desc;</li>
+
+**<strong>profit manipulation for market research</strong>
 <li> select Max(total_price) from order_items; </li>
 <li> select Min(total_price) from order_items; </li>
  <li> select avg(total_price) from order_items; </li>
@@ -283,7 +286,7 @@ select*from customers;
 
 </ol>
 
-<lh2>Conclusions</lh2>
+<h2>Conclusions</h2>
 
 ** From this lesson I learned to create, modify, insert and manipulate information in databases. I am aware that there is a long way to go to fully understand all these tasks, but practice makes it better. 
 I can query this database and find out the information necessary to pick up and send an order, thus avoiding irregularities, which could affect the quality of the service. Quality starts primarily from the accuracy and correctness of the information and its use for our benefit.

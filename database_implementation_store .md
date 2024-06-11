@@ -43,18 +43,18 @@ The tables are connected in the following way:
  <li>**CREATE DATABASE store ;
         USE store;</li> 
 
-<li><strong>CREATE TABLE products</strong> (
+<li><b>CREATE TABLE products</b> (
  Id int  primary key auto_increment,
    name varchar(50) NOT NULL,
   quantity_in_stock  int NOT NULL,
   unit_price int not null); </li>
 
-<li>CREATE TABLE shippers (
+<li><b>CREATE TABLE shippers</b> (
  id  int primary key auto_increment,
   name varchar(50) NOT NULL); </li>
   
   
-<li>CREATE TABLE customers (
+<li><b>CREATE TABLE customers</b> (
   id int primary key auto_increment,
   first_name  varchar(50) NOT NULL,
   last_name varchar(50) NOT NULL,
@@ -65,11 +65,11 @@ The tables are connected in the following way:
   state char(2) NOT NULL); </li>
   
 
-<li>CREATE TABLE order_statuses (order_statusesorder_statuses
+<li><b>CREATE TABLE order_statuses</b> (order_statusesorder_statuses
 id int primary key auto_increment,
 name varchar(50) NOT NULL); </li>
 
-<li>CREATE TABLE orders (
+<li><b>CREATE TABLE orders</b> (
      id  int primary key auto_increment,
      id_customer  int ,
  id_shipper int ,
@@ -80,7 +80,7 @@ name varchar(50) NOT NULL); </li>
 	foreign key(id_shipper) references shippers(id),
 	foreign key(id_order_status) references order_statuses(id)); </li>
 	
-<li>CREATE TABLE order_items (
+<li><b>CREATE TABLE order_items</b> (
   id int primary key auto_increment,
   id_product  int,
   quantity int NOT NULL,
@@ -88,14 +88,14 @@ name varchar(50) NOT NULL); </li>
   foreign key (id_product) references products(id)); </li>
  
 
-<li>CREATE TABLE My_store(
+<li><b>CREATE TABLE My_store</b> (
 id int primary key auto_increment,
 id_order int,
 id_product int,
 foreign key(id_order) references orders(id),
 foreign key(id_product) references products(id)); </li>
 
-<li> Create table failed_orders(
+<li> <b>Create table failed_orders</b>(
 id int, 
 order_id int, 
 comments varchar (2000)); </li>
@@ -104,14 +104,14 @@ comments varchar (2000)); </li>
  <p>After the database and the tables have been created, a few ALTER instructions were written in order to update the structure of the database, as described below:</p> 
 
  ** Change the name of the column  ** 
- <li>alter table order_items change unit_price total_price int;</li> 
+ <li>alter table order_items change unit_price total_price int;</li><br>
  **- change the properties of one column** 
- <li> alter table customers modify column city varchar ( 25); </li> 
+ <li> alter table customers modify column city varchar ( 25); </li><br>
 **- change the name of the tables**
  <li> rename table products to items;
-      rename table items to products; </li>
+      rename table items to products; </li><br>
 **- delete a column  from the  table  **
-<li>alter table customers drop column country; </li>
+<li>alter table customers drop column country; </li><br>
 ** adding column properties (adding auto-increment)
 <li>alter table failed_orders add primary key(id);</li>
 

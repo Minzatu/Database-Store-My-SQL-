@@ -248,7 +248,9 @@ drop table failed_orders;
 <p>In order to simulate various scenarios that might happen in real life I created the following queries that would cover multiple potential real-life situations:</p>
 
 **Where**<br>
-<li> select *from customers  where city='Brasov'; </li>
+```
+select *from customers  where city='Brasov';
+```
 
 **Order By**<br>
 _ordering the products according to increasing price_
@@ -359,7 +361,7 @@ select id, max(total_price) from order_items group by id having max(total_price)
 _I want to find the product with the largest quantity in stock_
 ```
 select name from items where quantity_in_stock=(select max(quantity_in_stock) from items);
-``
+```
 
 
 <h2>Conclusions</h2>

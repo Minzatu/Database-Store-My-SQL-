@@ -71,7 +71,8 @@ CREATE TABLE shippers (
 ```
   
 ```
-CREATE TABLE order_statuses (order_statusesorder_statuses
+CREATE TABLE order_statuses (order_statuses,
+order_statuses
 id int primary key auto_increment,
 name varchar(50) NOT NULL);
 ```
@@ -80,10 +81,10 @@ name varchar(50) NOT NULL);
 CREATE TABLE orders (
      id  int primary key auto_increment,
      id_customer  int ,
- id_shipper int ,
-     id_order_status int,
-	 order_date date NOT NULL,
-	shipped_date date  ,
+     id_shipper int ,
+     order_status int,
+     order_date date NOT NULL,
+     shipped_date date,
 	foreign key(id_customer) references customers(id),
 	foreign key(id_shipper) references shippers(id),
 	foreign key(id_order_status) references order_statuses(id));
@@ -266,71 +267,83 @@ select*from order_items order by quantity limit 3;
 
 **AND**
 ```
-select *from customers where city='Brasov'and city='cluj napoca';
+select *from orders where extract(year from order_date) = 2024 and status='Canceled';
 ```
 
 **OR**<br>
 ```
-select *from customers where city='Brasov'or city='cluj napoca ';
+select *from customers where city='Brasov'or city='Cluj napoca ';
 ```
 
 **NOT**<br>
 ```
-select *from customers where not city='Brasov'and city='cluj';
+select * from orders where not order_status = 'Cancelled';
 ```
 
 **Like**<br>
 ```
-select *from items where  name  like 'S%';
+select *from items where  name like 'S%';
 select *from items where  name like '%r';
 select *from items where  name like '%u%';
 select *from items where  name like '_t%';
 ```
 
 **Inner join**<br>
-_I want to know the name and surname of the customers and the date of the order_
+_We want to extract all the customer who have orders ongoing_
 ```
-select first_name,last_name,order_date from orders inner join customers on orders.id_customer=customers.id;
+select first_name,last_name,order_date, order_status
+from orders o
+inner join customers c
+on o.id_customer=c.customers.id
+where order_status not in ("Shipped","Cancelled","Delivered")
 ```
 
 _I want to find out the client id, the order id and the id of the ordered product_
 ```
-select id_order,id_product,id_customer from my_store inner join orders on orders.id= my_store.id_order;
+select id_order,id_product,id_customer
+from my_store m
+inner join orders o on o.id= m.id_order;
 ```
+
 _I want to group the name of the product with the price per unit and the price per order_
 ```
-select name,unit_price,total_price  from items join 
-  order_items on items.id=order_items.id_product;
+select oi.order_id, p.name, price*quantity as total_price
+from products p
+join order_items oi on p.id=oi.id_product;
+
 ```
 
 **Left join**<br>
+_I want to select all the customer who did not perform any order_
+
 ```
-select first_name,last_name,city, id_customer from customers left join orders on customers.id = orders.id-id_customer;
+select first_name,last_name,city, id_customer
+from customers c
+left join orders o on c.id = o.id_customer
+where o.id_customer is null;
 ```
 
   
 **Right join**<br>
-_Assignment of products with the quantity in stock_
+_Select all the failed orders_
+
 ```
-select name, quantity from order_items right join items on order_items.id_product=items.id;
+select id_order, comment
+from failed_orders fo
+right join orders  o on fo.id_order = o.id
+where fo.id_order is not null
 ```
 
 _The grouping of courier companies according to the city, where the delivery will take place_
 ```
-select city, id_shipper from customers right join orders on orders.id_customer=customers.id;
-```
-
-**Cross join**<br>
-```
-select city, id_shipper from customers cross join orders ;
-select name, quantity from order_items cross join items ;
+select c.city, s.name, c.first_name, c.last_name, o.order_id 
+from shippers s
+right join orders o on o.shipper_id = s.id
+right_join customers c on o.id_customer=c.id
 ```
    
 **Aggregate functions**<br>
-_Obtaining a sales profit ranking_
-```
-select*from order_items order by total_price desc;
-```
+
 
 _Profit manipulation for market research_
 ```
@@ -341,26 +354,49 @@ select sum(total_price) from order_items;
 ```
 
 **Group by**<br>
+
 _Grouping orders according to status_
 ```
-select id_order_status, count(id) from orders group by id_order_status;
+select id_order_status, count(id)
+from orders
+group by id_order_status;
+```
+
+_Obtaining a sales profit ranking_
+```
+select extract(month from order_date) as order_month, sum(p.price * oi.quantity) as total_price
+from products p
+inner join orders on o.product_id = p.id
+inner join order_items oi on o.order_id = oi.order_id
+group by order_month
+order by total_price desc;
 ```
 
 _Finding the customers, depending on city_
 ```
-select city, count(id) from customers group by city;
+select city, count(id)
+from customers group by city;
 ```
 
-**Having**<br>
-_Performing a ranking of the orders according to the price > 999 and the largest quantity ordered_
-```
-select id, max(total_price) from order_items group by id having max(total_price)>999;
+**Having + Subqueries**<br>
+
+_Performing a ranking of the orders according to the total value > 999 and the largest quantity ordered_
 ```
 
-**Subqueries**<br>
+select o.order_id, max(oi.quantity) where order_id in
+(
+select o.order_id, sum(p.price * oi.quantity) as total_price
+from products p
+inner join orders on o.product_id = p.id
+inner join order_items oi on o.order_id = oi.order_id
+having total_price >999
+);
+```
+
 _I want to find the product with the largest quantity in stock_
 ```
-select name from items where quantity_in_stock=(select max(quantity_in_stock) from items);
+select name
+from products where quantity_in_stock = (select max(quantity_in_stock) from products);
 ```
 
 

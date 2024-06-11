@@ -40,21 +40,26 @@ The tables are connected in the following way:
 
   The following instructions were written in the scope of CREATING the structure of the database (CREATE INSTRUCTIONS)
 
- <li>**CREATE DATABASE store ;
-        USE store;</li> 
+ ```
+CREATE DATABASE store ;
+USE store;
+```
 
-<li><b>CREATE TABLE products</b> (
+```
+CREATE TABLE products (
  Id int  primary key auto_increment,
    name varchar(50) NOT NULL,
   quantity_in_stock  int NOT NULL,
-  unit_price int not null); </li>
+  unit_price int not null);
+```
 
-<li><b>CREATE TABLE shippers</b> (
+```
+CREATE TABLE shippers (
  id  int primary key auto_increment,
-  name varchar(50) NOT NULL); </li>
+  name varchar(50) NOT NULL);
+```
   
-  
-<li><b>CREATE TABLE customers</b> (
+```CREATE TABLE customers (
   id int primary key auto_increment,
   first_name  varchar(50) NOT NULL,
   last_name varchar(50) NOT NULL,
@@ -62,14 +67,17 @@ The tables are connected in the following way:
   phone  varchar(50)  NULL,
   address  varchar(50) NOT NULL,
   city  varchar(50) NOT NULL,
-  state char(2) NOT NULL); </li>
+  state char(2) NOT NULL);
+```
   
-
-<li><b>CREATE TABLE order_statuses</b> (order_statusesorder_statuses
+```
+CREATE TABLE order_statuses (order_statusesorder_statuses
 id int primary key auto_increment,
-name varchar(50) NOT NULL); </li>
+name varchar(50) NOT NULL);
+```
 
-<li><b>CREATE TABLE orders</b> (
+```
+CREATE TABLE orders (
      id  int primary key auto_increment,
      id_customer  int ,
  id_shipper int ,
@@ -78,32 +86,37 @@ name varchar(50) NOT NULL); </li>
 	shipped_date date  ,
 	foreign key(id_customer) references customers(id),
 	foreign key(id_shipper) references shippers(id),
-	foreign key(id_order_status) references order_statuses(id)); </li>
+	foreign key(id_order_status) references order_statuses(id));
+```
 	
-<li><b>CREATE TABLE order_items</b> (
+```
+CREATE TABLE order_items (
   id int primary key auto_increment,
   id_product  int,
   quantity int NOT NULL,
   unit_price int  NOT NULL,
-  foreign key (id_product) references products(id)); </li>
+  foreign key (id_product) references products(id));
+```
  
-
-<li><b>CREATE TABLE My_store</b> (
+```
+CREATE TABLE My_store (
 id int primary key auto_increment,
 id_order int,
 id_product int,
 foreign key(id_order) references orders(id),
-foreign key(id_product) references products(id)); </li>
-
-<li> <b>Create table failed_orders</b>(
+foreign key(id_product) references products(id));
+```
+```
+Create table failed_orders(
 id int, 
 order_id int, 
-comments varchar (2000)); </li>
+comments varchar (2000));
+```
 
 
  <p>After the database and the tables have been created, a few ALTER instructions were written in order to update the structure of the database, as described below:</p> 
 
- ** Change the name of the column  ** 
+** Change the name of the column  ** 
  <li>alter table order_items change unit_price total_price int;</li><br>
  **- change the properties of one column** 
  <li> alter table customers modify column city varchar ( 25); </li><br>

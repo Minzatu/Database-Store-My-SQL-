@@ -2,11 +2,11 @@
 
 The scope of this project is to use all the SQL knowledge gained throught the Software Testing course and apply them in practice.
 
-Application under test: **Store**
+Database Created: **Store**
 
 Tools used: MySQL Workbench
 
-### Database description:###
+## Database description:
 <li>**Customers** - details about personal data of customers;</li>
 <li>**Items** -details about the products  name,quantity in stock and price per unit ; </li>
 <li>**Shippers** - details about the courier companies;</li>
@@ -19,7 +19,7 @@ Tools used: MySQL Workbench
  Accesing this databases  I can assure that everything goes as planned without  any delays involved. 
 
 
-***Database Schema***
+## Database Schema
 
  You can find below the database schema that was generated through Reverse Engineer and which contains all the tables and the relationships between them.
 
@@ -33,12 +33,12 @@ The tables are connected in the following way:
 <li>**Shipper** is connected with **Orders** through a **parent** relationship which was implemented through **Shipper.id** as a primary key and **.id_shipper_** as a foreign key</li> 
 <li>**Order_statuses** is connected with **Orders** through a **parent** relationship which was implemented through **order_statuses.id** as a primary key and **.id_order_status_** as a foreign key</li>
 
-## Database Queries##
+## Database Queries:
 
 
-## DDL (Data Definition Language)##
+### DDL (Data Definition Language)
 
-  The following instructions were written in the scope of CREATING the structure of the database (CREATE INSTRUCTIONS)
+The following instructions were written in the scope of CREATING the structure of the database (CREATE INSTRUCTIONS)
 
  ```
 CREATE DATABASE store ;
@@ -114,46 +114,58 @@ comments varchar (2000));
 ```
 
 
- <p>After the database and the tables have been created, a few ALTER instructions were written in order to update the structure of the database, as described below:</p> 
+<p>After the database and the tables have been created, a few ALTER instructions were written in order to update the structure of the database, as described below:</p> 
 
-** Change the name of the column  ** 
- <li>alter table order_items change unit_price total_price int;</li><br>
- **- change the properties of one column** 
- <li> alter table customers modify column city varchar ( 25); </li><br>
-**- change the name of the tables**
- <li> rename table products to items;
-      rename table items to products; </li><br>
-**- delete a column  from the  table  **
-<li>alter table customers drop column country; </li><br>
-** adding column properties (adding auto-increment)
-<li>alter table failed_orders add primary key(id);</li>
+**Change the name of the column** 
+ ```
+ alter table order_items change unit_price total_price int;
+```
+ **Change the properties of one column** 
+ ```
+ alter table customers modify column city varchar ( 25);
+```
+**Change the name of the tables**
+ ```
+ rename table products to items;
+ rename table items to products;
+```
+**Delete a column  from the  table**
+```
+alter table customers drop column country;
+```
+**Adding column properties (adding auto-increment)**
+```
+alter table failed_orders add primary key(id);
+```
 
 
+ ### DML (Data Manipulation Language)
  
-  
-  <li>DML (Data Manipulation Language)</li>
+In order to be able to use the database I populated the tables with various data necessary in order to perform queries and manipulate the data. 
+In the testing process, this necessary data is identified in the Test Design phase and created in the Test Implementation phase. 
 
-  In order to be able to use the database I populated the tables with various data necessary in order to perform queries and manipulate the data. 
-  In the testing process, this necessary data is identified in the Test Design phase and created in the Test Implementation phase. 
+**Below you can find all the insert instructions that were created in the scope of this project:**
 
-   **Below you can find all the insert instructions that were created in the scope of this project: **
-
- 
-<li> insert into items (id,name, quantity_in_stock,unit_price) values 
+``` 
+insert into items (id,name, quantity_in_stock,unit_price) values 
 (1,'notebook',35,13),
 (2,'pencils',100, 5),
 (3,'color books',250,10),
 (4,'white pages',1500,1),
 (5,'blue pen Stabilus',250,15),
 (6,'red pen Stabilus',350,16),
-(7,'sparkler pencils',354,6); </li>
+(7,'sparkler pencils',354,6);
+```
 
-<li> insert into shippers(name) values
+```
+insert into shippers(name) values
 ('Sameday'),
 ('Fancourier'),
-('Cargus'); </li>
+('Cargus');
+```
 
-<li> INSERT INTO  customers (first_name ,last_name ,birth_date ,phone, address, city ,state) VALUES
+```
+INSERT INTO  customers (first_name ,last_name ,birth_date ,phone, address, city ,state) VALUES
  ('Laura','Popescu','1986-03-28','0721965979','10 Ovidiu','Brasov','BV'),
  ('Ines','Cismas','1986-04-13','07321564987','141 Piata clujului','Cluj napoca','CJ'),
  ('Freddi','Kruger','1985-02-07','07654987123','251 Piata Unirii','Moinesti','BC'),
@@ -163,15 +175,18 @@ comments varchar (2000));
  ('Ileana','Dumitrache','1964-08-30','0745789456','50 1 Decembrie','Timisoara','TM'),
  ('Romina','Popescu','1993-07-17','0712654789','538 Mosinee Center','Sf Gheoghe ','CV'),
  ('Romola','Mirica','1992-05-23','0721321654','35 Mircea cel batran','Sf Gheorghe','CV'),
-('Liana','Minzatu','1969-10-13','0745789123','489 Grivitei','Brasov ','BV'); </li>
+('Liana','Minzatu','1969-10-13','0745789123','489 Grivitei','Brasov ','BV');
+```
 
-<li> insert into order_statuses (name ) values
+```
+insert into order_statuses (name ) values
 ('Processed'),
 ('Shipped'),
-('Delivered'); </li>
+('Delivered');
+```
 
-
-<li> insert into orders ( Id_customer,id_shipper,id_order_status,order_date,shipped_date) values 
+```
+insert into orders ( Id_customer,id_shipper,id_order_status,order_date,shipped_date) values 
 (1,3,2,'2024-05-12','2024-05-16'),
 (3,2,1,'2024-06-01','2024-06-03'),
 (5,3,2,'2024-06-02','2024-06-12'),
@@ -179,132 +194,178 @@ comments varchar (2000));
 (6,2,3,'2024-06-24','2024-06-27'),
 (7,1,2,'2024-06-16','2024-06-23'),
 (8,2,3,'2024-07-04','2024-07-05'),
-(9,3,3,'2024-05-12','2024-05-18' ); </li>
+(9,3,3,'2024-05-12','2024-05-18' );
+```
 
-
-<li> insert into order_items(id_product,quantity, unit_price ) values 
+```
+insert into order_items(id_product,quantity, unit_price ) values 
 (1,10,123),
 (3,2,10),
 (4,1000,1000),
 (6,70,1120),
 (7,20,120),
 (2,25,50),
-(5,45,675); </li>
+(5,45,675);
+```
 
-<li> insert into  my_store (id_order,id_product) values
+```
+insert into  my_store (id_order,id_product) values
 (81,5),
 (85,4),
 (82,6),
 (86,1),
 (88,3),
 (87,7),
-(86,5); </li>
-<li> insert into failed_orders(order_id, comments) values 
-(1,'problems related to the transport '),
-(2,'refused payment'); </li>
-  After the insert, in order to prepare the data to be better suited for the testing process, I updated some data in the following way:
+(86,5);
+```
 
-  ** update table orders set processing_time = 4 where id=81;
-      update table orders set processing_time = 2 where id=82; 
-          update customers set country ='Romania'where id =2;**
+```
+insert into failed_orders(order_id, comments) values 
+(1,'problems related to the transport'),
+(2,'refused payment');
+```
 
+After the insert, in order to prepare the data to be better suited for the testing process, I updated some data in the following way:
 
-  <h2>DQL (Data Query Language)</h2>
-
-After the testing process, I deleted the data that was no longer relevant in order to preserve the database clean: 
-
-<li> delete from customers where id=2; </li>
-<li> alter table customers drop column country; </li>
-<li>truncate failed_orders; </li>
-<li>drop table failed_orders; </li>
+```
+update table orders set processing_time = 4 where id=81;
+update table orders set processing_time = 2 where id=82; 
+update customers set country ='Romania'where id =2;
+```
 
 
-<h2>Data Manipulation Language </h2>
+ ### DQL (Data Query Language)
 
+<p>After the testing process, I deleted the data that was no longer relevant and the tables that will no longer be used in order to preserve the database clean:</p>
 
-In order to simulate various scenarios that might happen in real life I created the following queries that would cover multiple potential real-life situations:
+```
+delete from customers where id=2; 
+alter table customers drop column country;
+truncate failed_orders; 
+drop table failed_orders;
+```
 
-**-<strong> where</strong>**<br>
+<p>In order to simulate various scenarios that might happen in real life I created the following queries that would cover multiple potential real-life situations:</p>
+
+**Where**<br>
 <li> select *from customers  where city='Brasov'; </li>
 
-**-<strong> ORDER BY</strong>**<br>
-**-ordering the products according to increasing price**
-<li>select*from order_items order by total_price asc; </li>
-**-<strong>top 3 items with highest quantity in stock</strong>**
-<li> select*from order_items order by quantity limit 3;</li>
+**Order By**<br>
+_ordering the products according to increasing price_
 
-**-<strong>AND</strong><br>
-<li> select *from customers where city='Brasov'and city='cluj napoca'; </li>
+```
+select*from order_items order by total_price asc;
+```
 
-**- <strong>OR</strong>**<br>
-<li> select *from customers where city='Brasov'or city='cluj napoca '; </li>
+_top 3 items with highest quantity in stock_
+```
+select*from order_items order by quantity limit 3;
+```
 
-**-<strong>NOT</strong> **<br>
-<li> select *from customers where not city='Brasov'and city='cluj'; </li>
+**AND**
+```
+select *from customers where city='Brasov'and city='cluj napoca';
+```
 
-**- <strong>like</strong>**<br>
-<li> select *from items where  name  like 'S%'; </li>
-<li> select *from items where  name like '%r'; </li>
-<li> select *from items where  name like '%u%'; </li>
-<li> select *from items where  name like '_t%'; </li> 
+**OR**<br>
+```
+select *from customers where city='Brasov'or city='cluj napoca ';
+```
 
-**-<strong>inner join</strong> **<br>
-**-I want to know the name and surname of the customers and the date of the order**
-<li>select first_name,last_name,order_date from orders inner join customers on orders.id_customer=customers.id;</li>
-**-<strong>I want to find out the client id, the order id and the id of the ordered product**</strong> 
-<li>select id_order,id_product,id_customer from my_store inner join orders on orders.id= my_store.id_order;</li>
-**- <strong>I want to group the name of the product with the price per unit and the price per order;</strong>**
-<li> select name,unit_price,total_price  from items join 
-  order_items on items.id=order_items.id_product;</li>
+**NOT**<br>
+```
+select *from customers where not city='Brasov'and city='cluj';
+```
 
-**-<strong>left join</strong> **<br>
-<li>  select first_name,last_name,city, id_customer from customers left join orders on customers.id = orders.id-id_customer;</li>
+**Like**<br>
+```
+select *from items where  name  like 'S%';
+select *from items where  name like '%r';
+select *from items where  name like '%u%';
+select *from items where  name like '_t%';
+```
+
+**Inner join**<br>
+_I want to know the name and surname of the customers and the date of the order_
+```
+select first_name,last_name,order_date from orders inner join customers on orders.id_customer=customers.id;
+```
+
+_I want to find out the client id, the order id and the id of the ordered product_
+```
+select id_order,id_product,id_customer from my_store inner join orders on orders.id= my_store.id_order;
+```
+_I want to group the name of the product with the price per unit and the price per order_
+```
+select name,unit_price,total_price  from items join 
+  order_items on items.id=order_items.id_product;
+```
+
+**Left join**<br>
+```
+select first_name,last_name,city, id_customer from customers left join orders on customers.id = orders.id-id_customer;
+```
 
   
-**- right join**<br>
-**-assignment of products with the quantity in stock**
-<li> select name, quantity from order_items right join items on order_items.id_product=items.id;</li>
-**<strong> -the grouping of courier companies according to the city, where the delivery will take place</strong>**
-<li> select city, id_shipper from customers right join orders on orders.id_customer=customers.id;</li>
+**Right join**<br>
+_Assignment of products with the quantity in stock_
+```
+select name, quantity from order_items right join items on order_items.id_product=items.id;
+```
 
-**- <strong>cross join</strong>**<br>
-<li> select city, id_shipper from customers cross join orders ;</li>
-   <li>select name, quantity from order_items cross join items ;</li>
+_The grouping of courier companies according to the city, where the delivery will take place_
+```
+select city, id_shipper from customers right join orders on orders.id_customer=customers.id;
+```
+
+**Cross join**<br>
+```
+select city, id_shipper from customers cross join orders ;
+select name, quantity from order_items cross join items ;
+```
    
-**<strong>-aggregate functions</strong> **<br>
-**-obtaining a sales profit ranking**
-<li> select*from order_items order by total_price desc;</li>
+**Aggregate functions**<br>
+_Obtaining a sales profit ranking_
+```
+select*from order_items order by total_price desc;
+```
 
-**<strong>profit manipulation for market research</strong>
-<li> select Max(total_price) from order_items; </li>
-<li> select Min(total_price) from order_items; </li>
- <li> select avg(total_price) from order_items; </li>
-<li> select sum(total_price) from order_items; </li>
+_Profit manipulation for market research_
+```
+select Max(total_price) from order_items;
+select Min(total_price) from order_items; 
+select avg(total_price) from order_items; 
+select sum(total_price) from order_items; 
+```
 
-**- <strong>group by</strong>**<br>
-**-grouping orders according to status**
-<li> select id_order_status, count(id) from orders group by id_order_status; </li>
-**<strong>-finding the customers, depending on city ;</strong>**
-<li> select city, count(id) from customers group by city ; </li>
+**Group by**<br>
+_Grouping orders according to status_
+```
+select id_order_status, count(id) from orders group by id_order_status;
+```
 
-**-<strong>having</strong> **<br>
-** <strong>performing a ranking of the orders according to the price > 999 and the largest quantity ordered;</strong> **
-<li> select id, max(total_price) from order_items group by id having max(total_price)>999; </li>
+_Finding the customers, depending on city_
+```
+select city, count(id) from customers group by city;
+```
 
-select*from customers;
-**- Subqueries **<br>
-**- I want to find the product with the largest quantity in stock;**
-<li>select name from items where quantity_in_stock=(select max(quantity_in_stock) from items);</li>
+**Having**<br>
+_Performing a ranking of the orders according to the price > 999 and the largest quantity ordered_
+```
+select id, max(total_price) from order_items group by id having max(total_price)>999;
+```
 
+**Subqueries**<br>
+_I want to find the product with the largest quantity in stock_
+```
+select name from items where quantity_in_stock=(select max(quantity_in_stock) from items);
+``
 
-</ol>
 
 <h2>Conclusions</h2>
 
-** From this lesson I learned to create, modify, insert and manipulate information in databases. I am aware that there is a long way to go to fully understand all these tasks, but practice makes it better. 
+From this lesson I learned to create, modify, insert and manipulate information in databases. I am aware that there is a long way to go to fully understand all these tasks, but practice makes it better. 
 I can query this database and find out the information necessary to pick up and send an order, thus avoiding irregularities, which could affect the quality of the service. Quality starts primarily from the accuracy and correctness of the information and its use for our benefit.
 Through the various scenarios, I was able to find out exactly the delivery address, who will deliver, when and at what stage the order is.  
 I can manage my stock of products, the price per piece and make a profit analysis. 
-This skill will help me avoid making mistakes and manually testing an app/page  **
-
-</ol>
+This skill will help me avoid making mistakes and manually testing an app/page
